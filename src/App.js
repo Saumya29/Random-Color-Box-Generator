@@ -18,7 +18,7 @@ class App extends Component {
     const boxes = Array(NUM_BOXES).fill().map(this.getRandomColor, this);
     this.state = {boxes};
 
-    setInterval(() => {
+    this.intervalID = setInterval(() => {
       const boxes = this.state.boxes.slice();
       const randIndex = Math.floor(Math.random() * boxes.length);
       boxes[randIndex] = this.getRandomColor();
@@ -40,6 +40,10 @@ class App extends Component {
         {boxes}
       </div>
     );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
   }
 }
 
